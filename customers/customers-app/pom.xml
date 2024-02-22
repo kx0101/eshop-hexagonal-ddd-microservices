@@ -15,6 +15,7 @@
 	<name>customers-app</name>
 
 	<dependencies>
+
         <dependency>
             <groupId>com.elijahkx.customers</groupId>
             <artifactId>customers-adapter</artifactId>
@@ -25,30 +26,6 @@
             <groupId>com.elijahkx.customers</groupId>
             <artifactId>customers-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
 	</dependencies>
