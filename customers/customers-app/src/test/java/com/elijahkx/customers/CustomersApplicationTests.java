@@ -1,10 +1,10 @@
-package com.elijahkx.eshop;
+package com.elijahkx.customers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EshopApplicationTests {
+class CustomersApplicationTests {
 
 	@Test
 	void contextLoads() {
