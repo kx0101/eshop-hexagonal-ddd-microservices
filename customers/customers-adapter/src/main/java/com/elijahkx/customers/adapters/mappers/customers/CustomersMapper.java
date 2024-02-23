@@ -8,7 +8,7 @@ import com.elijahkx.customers.rest.dto.Customer;
 import com.elijahkx.customers.adapters.outbound.persistence.entities.customer.CustomerEntity;
 import com.elijahkx.customers.domain.customers.CustomerDomain;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface CustomersMapper {
 
     Customer domainToDto(CustomerDomain customerDomain);
