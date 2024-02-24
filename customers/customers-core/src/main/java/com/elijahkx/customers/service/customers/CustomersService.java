@@ -12,9 +12,9 @@ public interface CustomersService {
 
     CustomerDomain updateCustomer(CustomerDomain customer);
 
-    Optional<CustomerDomain> findById(Long id);
+    Optional<CustomerDomain> findCustomerDomainByEmail(String email);
 
-    Optional<CustomerDomain> findByEmail(String email);
+    Optional<CustomerDomain> findCustomerDomainById(Long id);
 
     void deleteCustomerByEmail(String email);
 }

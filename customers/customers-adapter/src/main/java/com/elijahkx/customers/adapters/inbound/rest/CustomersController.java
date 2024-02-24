@@ -45,7 +45,7 @@ public class CustomersController implements CustomersApi {
 
     @Override
     public ResponseEntity<Customer> findById(@PathVariable Long id) {
-        Optional<CustomerDomain> customerDomainOptional = customersService.findById(id);
+        Optional<CustomerDomain> customerDomainOptional = customersService.findCustomerDomainById(id);
 
         return customerDomainOptional
                 .map(customerDomain -> ResponseEntity.ok(customersMapper.domainToDto(customerDomain)))
@@ -54,7 +54,7 @@ public class CustomersController implements CustomersApi {
 
     @Override
     public ResponseEntity<Object> deleteCustomerByEmail(@PathVariable String email) {
-        Optional<CustomerDomain> customerDomainOptional = customersService.findByEmail(email);
+        Optional<CustomerDomain> customerDomainOptional = customersService.findCustomerDomainByEmail(email);
 
         if (customerDomainOptional.isPresent()) {
             customersService.deleteCustomerByEmail(email);
@@ -69,7 +69,7 @@ public class CustomersController implements CustomersApi {
 
     @Override
     public ResponseEntity<Object> updateCustomer(@RequestBody @Valid Customer customer) {
-        Optional<CustomerDomain> customerDomainOptional = customersService.findById(customer.getId());
+        Optional<CustomerDomain> customerDomainOptional = customersService.findCustomerDomainById(customer.getId());
 
         if (customerDomainOptional.isPresent()) {
             CustomerDomain customerDomain = customerDomainOptional.get();

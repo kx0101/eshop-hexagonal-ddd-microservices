@@ -1,6 +1,5 @@
 package com.elijahkx.customers.adapters.outbound.persistence.dbadapter;
 
-import com.elijahkx.customers.adapters.outbound.persistence.entities.customer.CustomerEntity;
 import com.elijahkx.customers.adapters.outbound.persistence.repositories.CustomersRepository;
 import com.elijahkx.customers.domain.customers.CustomerDomain;
 import com.elijahkx.customers.outbound.persistence.CustomersPort;
@@ -25,13 +24,13 @@ public class CustomersDBAdapter implements CustomersPort {
     }
 
     @Override
-    public CustomerDomain addCustomer(CustomerDomain customerDomain) {
-        return customersMapper.entityToDomain(customersRepository.save(customersMapper.domainToEntity(customerDomain)));
+    public List<CustomerDomain> findByCriteria() {
+        return customersMapper.entityToDomain(customersRepository.findAll());
     }
 
     @Override
-    public List<CustomerDomain> findByCriteria() {
-        return customersMapper.entityToDomain(customersRepository.findAll());
+    public CustomerDomain addCustomer(CustomerDomain customerDomain) {
+        return customersMapper.entityToDomain(customersRepository.save(customersMapper.domainToEntity(customerDomain)));
     }
 
     @Override
@@ -40,7 +39,7 @@ public class CustomersDBAdapter implements CustomersPort {
     }
 
     @Override
-    public Optional<CustomerDomain> findByEmail(String email) {
+    public Optional<CustomerDomain> findCustomerDomainByEmail(String email) {
         return customersRepository.findByEmail(email).map(customersMapper::entityToDomain);
     }
 

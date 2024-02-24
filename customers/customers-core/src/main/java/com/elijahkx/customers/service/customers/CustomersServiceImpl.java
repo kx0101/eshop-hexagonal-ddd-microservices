@@ -20,6 +20,11 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     @Override
+    public List<CustomerDomain> findByCriteria() {
+        return customersPort.findByCriteria();
+    }
+
+    @Override
     public CustomerDomain addCustomer(CustomerDomain customer) {
         emailExists(customer.getEmail());
 
@@ -27,18 +32,13 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     @Override
-    public List<CustomerDomain> findByCriteria() {
-        return customersPort.findByCriteria();
-    }
-
-    @Override
-    public Optional<CustomerDomain> findById(Long id) {
+    public Optional<CustomerDomain> findCustomerDomainById(Long id) {
         return customersPort.findCustomerDomainById(id);
     }
 
     @Override
-    public Optional<CustomerDomain> findByEmail(String email) {
-        return customersPort.findByEmail(email);
+    public Optional<CustomerDomain> findCustomerDomainByEmail(String email) {
+        return customersPort.findCustomerDomainByEmail(email);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     private void emailExists(String email) {
-        Optional<CustomerDomain> customer = customersPort.findByEmail(email);
+        Optional<CustomerDomain> customer = customersPort.findCustomerDomainByEmail(email);
 
         if (customer.isPresent()) {
             throw new EmailAlreadyExistsException("Email already exists");
