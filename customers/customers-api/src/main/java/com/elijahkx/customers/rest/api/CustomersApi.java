@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,4 +33,11 @@ public interface CustomersApi {
     @Operation(summary = "Create a new customer")
     @PostMapping(BASE_URL)
     ResponseEntity<Customer> addCustomer(@RequestBody Customer customer);
+
+    @Operation(summary = "Get a customer by id")
+    @GetMapping(BASE_URL + "/{id}")
+    ResponseEntity<Customer> findById(
+            @Parameter(description = "The id of the customer") 
+            @PathVariable(required = true) Long id
+    );
 }

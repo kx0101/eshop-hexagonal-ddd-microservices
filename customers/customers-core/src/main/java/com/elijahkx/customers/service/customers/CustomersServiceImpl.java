@@ -1,5 +1,8 @@
 package com.elijahkx.customers.service.customers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.elijahkx.customers.domain.customers.CustomerDomain;
@@ -17,5 +20,15 @@ public class CustomersServiceImpl implements CustomersService {
     @Override
     public CustomerDomain addCustomer(CustomerDomain customer) {
         return customersPort.addCustomer(customer);
+    }
+
+    @Override
+    public List<CustomerDomain> findByCriteria() {
+        return customersPort.findByCriteria();
+    }
+
+    @Override
+    public Optional<CustomerDomain> findById(Long id) {
+        return customersPort.findCustomerDomainById(id);
     }
 }

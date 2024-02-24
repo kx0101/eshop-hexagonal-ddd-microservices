@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
+    private Long Id;
 
     @Size(min = 1, max = 10)
     private String name;
