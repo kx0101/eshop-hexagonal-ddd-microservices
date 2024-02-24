@@ -43,9 +43,9 @@ public interface CustomersApi {
             @PathVariable(required = true) Long id
     );
 
-    @Operation(summary = "Delete a customer by id")
+    @Operation(summary = "Delete a customer by email")
     @DeleteMapping(BASE_URL + "/{email}")
-    ResponseEntity<Object> deleteCustomer(
+    ResponseEntity<Object> deleteCustomerByEmail(
             @Parameter(description = "The email of the customer") 
             @PathVariable(required = true) String email
     );

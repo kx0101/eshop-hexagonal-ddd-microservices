@@ -14,5 +14,5 @@ public interface CustomersPort {
 
     Optional<CustomerDomain> findByEmail(String email);
 
-    void deleteCustomer(String email);
+    void deleteCustomerByEmail(String email);
 }

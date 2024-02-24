@@ -54,11 +54,11 @@ public class CustomersController implements CustomersApi {
     }
 
     @Override
-    public ResponseEntity<Object> deleteCustomer(@PathVariable String email) {
+    public ResponseEntity<Object> deleteCustomerByEmail(@PathVariable String email) {
         Optional<CustomerDomain> customerDomainOptional = customersService.findByEmail(email);
 
         if (customerDomainOptional.isPresent()) {
-            customersService.deleteCustomer(email);
+            customersService.deleteCustomerByEmail(email);
 
             return ResponseEntity.ok().build();
         }

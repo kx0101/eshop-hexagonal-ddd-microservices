@@ -5,7 +5,6 @@ import com.elijahkx.customers.adapters.outbound.persistence.repositories.Custome
 import com.elijahkx.customers.domain.customers.CustomerDomain;
 import com.elijahkx.customers.outbound.persistence.CustomersPort;
 
-import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +49,7 @@ public class CustomersDBAdapter implements CustomersPort {
     }
 
     @Override
-    public void deleteCustomer(String email) {
+    public void deleteCustomerByEmail(String email) {
         customersRepository.deleteByEmail(email);
     }
 }

@@ -43,8 +43,8 @@ public class CustomersServiceImpl implements CustomersService {
 
     @Override
     @Transactional
-    public void deleteCustomer(String email) {
-        customersPort.deleteCustomer(email);
+    public void deleteCustomerByEmail(String email) {
+        customersPort.deleteCustomerByEmail(email);
     }
 
     private void emailExists(String email) {
