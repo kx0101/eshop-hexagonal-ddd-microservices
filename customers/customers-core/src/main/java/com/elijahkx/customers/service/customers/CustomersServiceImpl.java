@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.elijahkx.customers.domain.customers.CustomerDomain;
 import com.elijahkx.customers.exceptions.EmailAlreadyExistsException;
@@ -35,10 +36,21 @@ public class CustomersServiceImpl implements CustomersService {
         return customersPort.findCustomerDomainById(id);
     }
 
-    private void emailExists(String email) {
-        List<CustomerDomain> customer = customersPort.findByEmail(email);
+    @Override
+    public Optional<CustomerDomain> findByEmail(String email) {
+        return customersPort.findByEmail(email);
+    }
 
-        if (customer.size() > 0) {
+    @Override
+    @Transactional
+    public void deleteCustomer(String email) {
+        customersPort.deleteCustomer(email);
+    }
+
+    private void emailExists(String email) {
+        Optional<CustomerDomain> customer = customersPort.findByEmail(email);
+
+        if (customer.isPresent()) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
     }

@@ -43,9 +43,14 @@ public class CustomersDBAdapter implements CustomersPort {
     }
 
     @Override
-    public List<CustomerDomain> findByEmail(String email) {
-        List<CustomerEntity> customerEntity = customersRepository.findByEmail(email);
+    public Optional<CustomerDomain> findByEmail(String email) {
+        Optional<CustomerEntity> customerEntity = customersRepository.findByEmail(email);
 
-        return customerEntity.stream().map(customersMapper::entityToDomain).collect(Collectors.toList());
+        return customerEntity.map(customersMapper::entityToDomain);
+    }
+
+    @Override
+    public void deleteCustomer(String email) {
+        customersRepository.deleteByEmail(email);
     }
 }

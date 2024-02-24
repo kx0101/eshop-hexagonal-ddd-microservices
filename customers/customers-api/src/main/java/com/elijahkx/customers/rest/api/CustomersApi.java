@@ -3,6 +3,7 @@ package com.elijahkx.customers.rest.api;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,5 +41,12 @@ public interface CustomersApi {
     ResponseEntity<Customer> findById(
             @Parameter(description = "The id of the customer") 
             @PathVariable(required = true) Long id
+    );
+
+    @Operation(summary = "Delete a customer by id")
+    @DeleteMapping(BASE_URL + "/{email}")
+    ResponseEntity<Object> deleteCustomer(
+            @Parameter(description = "The email of the customer") 
+            @PathVariable(required = true) String email
     );
 }

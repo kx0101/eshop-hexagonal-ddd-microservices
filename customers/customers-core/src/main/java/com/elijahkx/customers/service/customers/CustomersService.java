@@ -11,4 +11,8 @@ public interface CustomersService {
     CustomerDomain addCustomer(CustomerDomain customer);
 
     Optional<CustomerDomain> findById(Long id);
+
+    Optional<CustomerDomain> findByEmail(String email);
+
+    void deleteCustomer(String email);
 }
