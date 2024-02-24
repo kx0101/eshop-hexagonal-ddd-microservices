@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elijahkx.customers.adapters.mappers.customers.CustomersMapper;
@@ -14,7 +15,10 @@ import com.elijahkx.customers.rest.api.CustomersApi;
 import com.elijahkx.customers.rest.dto.Customer;
 import com.elijahkx.customers.service.customers.CustomersService;
 
+import jakarta.validation.Valid;
+
 @RestController
+@Validated
 public class CustomersController implements CustomersApi {
 
     private final CustomersService customersService;
@@ -32,7 +36,7 @@ public class CustomersController implements CustomersApi {
     }
 
     @Override
-    public ResponseEntity<Customer> addCustomer(Customer customer) {
+    public ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer) {
         return ResponseEntity
                 .ok(customersMapper.domainToDto(customersService.addCustomer(customersMapper.dtoToDomain(customer))));
     }

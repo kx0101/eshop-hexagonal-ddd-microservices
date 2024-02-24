@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name = "customers", description = "the customers API")
 public interface CustomersApi {
@@ -32,7 +33,7 @@ public interface CustomersApi {
 
     @Operation(summary = "Create a new customer")
     @PostMapping(BASE_URL)
-    ResponseEntity<Customer> addCustomer(@RequestBody Customer customer);
+    ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer);
 
     @Operation(summary = "Get a customer by id")
     @GetMapping(BASE_URL + "/{id}")

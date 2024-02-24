@@ -5,6 +5,7 @@ import com.elijahkx.customers.adapters.outbound.persistence.repositories.Custome
 import com.elijahkx.customers.domain.customers.CustomerDomain;
 import com.elijahkx.customers.outbound.persistence.CustomersPort;
 
+import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,5 +40,12 @@ public class CustomersDBAdapter implements CustomersPort {
         Optional<CustomerEntity> customerEntity = customersRepository.findById(id);
 
         return customerEntity.map(customersMapper::entityToDomain);
+    }
+
+    @Override
+    public List<CustomerDomain> findByEmail(String email) {
+        List<CustomerEntity> customerEntity = customersRepository.findByEmail(email);
+
+        return customerEntity.stream().map(customersMapper::entityToDomain).collect(Collectors.toList());
     }
 }

@@ -11,4 +11,6 @@ public interface CustomersPort {
     CustomerDomain addCustomer(CustomerDomain customer);
 
     Optional<CustomerDomain> findCustomerDomainById(Long id);
+
+    List<CustomerDomain> findByEmail(String email);
 }
