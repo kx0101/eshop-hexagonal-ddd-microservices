@@ -10,6 +10,8 @@ public interface CustomersService {
 
     CustomerDomain addCustomer(CustomerDomain customer);
 
+    CustomerDomain updateCustomer(CustomerDomain customer);
+
     Optional<CustomerDomain> findById(Long id);
 
     Optional<CustomerDomain> findByEmail(String email);

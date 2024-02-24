@@ -36,16 +36,17 @@ public class CustomersDBAdapter implements CustomersPort {
 
     @Override
     public Optional<CustomerDomain> findCustomerDomainById(Long id) {
-        Optional<CustomerEntity> customerEntity = customersRepository.findById(id);
-
-        return customerEntity.map(customersMapper::entityToDomain);
+        return customersRepository.findById(id).map(customersMapper::entityToDomain);
     }
 
     @Override
     public Optional<CustomerDomain> findByEmail(String email) {
-        Optional<CustomerEntity> customerEntity = customersRepository.findByEmail(email);
+        return customersRepository.findByEmail(email).map(customersMapper::entityToDomain);
+    }
 
-        return customerEntity.map(customersMapper::entityToDomain);
+    @Override
+    public CustomerDomain updateCustomer(CustomerDomain customerDomain) {
+        return customersMapper.entityToDomain(customersRepository.save(customersMapper.domainToEntity(customerDomain)));
     }
 
     @Override

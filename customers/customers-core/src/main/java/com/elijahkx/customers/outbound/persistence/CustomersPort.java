@@ -9,6 +9,8 @@ public interface CustomersPort {
     List<CustomerDomain> findByCriteria();
 
     CustomerDomain addCustomer(CustomerDomain customer);
+    
+    CustomerDomain updateCustomer(CustomerDomain customer);
 
     Optional<CustomerDomain> findCustomerDomainById(Long id);
 

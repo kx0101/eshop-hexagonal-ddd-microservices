@@ -42,6 +42,11 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     @Override
+    public CustomerDomain updateCustomer(CustomerDomain customer) {
+        return customersPort.updateCustomer(customer);
+    }
+
+    @Override
     @Transactional
     public void deleteCustomerByEmail(String email) {
         customersPort.deleteCustomerByEmail(email);

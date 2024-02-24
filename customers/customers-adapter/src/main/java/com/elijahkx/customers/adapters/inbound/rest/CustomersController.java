@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elijahkx.customers.adapters.mappers.customers.CustomersMapper;
@@ -66,5 +65,23 @@ public class CustomersController implements CustomersApi {
         ElijahErrorResponse errorResponse = new ElijahErrorResponse(HttpStatus.NOT_FOUND,
                 "Customer not found for email: " + email);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @Override
+    public ResponseEntity<Object> updateCustomer(@RequestBody @Valid Customer customer) {
+        Optional<CustomerDomain> customerDomainOptional = customersService.findById(customer.getId());
+
+        if (customerDomainOptional.isPresent()) {
+            CustomerDomain customerDomain = customerDomainOptional.get();
+
+            customerDomain.setEmail(customer.getEmail());
+            customerDomain.setName(customer.getName());
+
+            return ResponseEntity.ok(customersMapper.domainToDto(customersService.updateCustomer(customerDomain)));
+        } else {
+            ElijahErrorResponse errorResponse = new ElijahErrorResponse(HttpStatus.NOT_FOUND, "Customer not found");
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
     }
 }
