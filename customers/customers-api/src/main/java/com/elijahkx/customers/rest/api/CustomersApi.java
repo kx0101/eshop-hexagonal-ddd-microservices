@@ -37,9 +37,12 @@ public interface CustomersApi {
     @PostMapping(BASE_URL)
     ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer);
 
-    @Operation(summary = "Update a customer")
-    @PutMapping(BASE_URL)
-    ResponseEntity<Object> updateCustomer(@RequestBody @Valid Customer customer);
+    @Operation(summary = "Update a customer by id")
+    @PutMapping(BASE_URL + "/{id}")
+    ResponseEntity<Object> updateCustomer(
+            @RequestBody @Valid Customer customer,
+            @PathVariable(required = true) Long id
+    );
 
     @Operation(summary = "Get a customer by id")
     @GetMapping(BASE_URL + "/{id}")

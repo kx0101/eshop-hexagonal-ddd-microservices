@@ -68,8 +68,8 @@ public class CustomersController implements CustomersApi {
     }
 
     @Override
-    public ResponseEntity<Object> updateCustomer(@RequestBody @Valid Customer customer) {
-        Optional<CustomerDomain> customerDomainOptional = customersService.findCustomerDomainById(customer.getId());
+    public ResponseEntity<Object> updateCustomer(@RequestBody @Valid Customer customer, @PathVariable Long id) {
+        Optional<CustomerDomain> customerDomainOptional = customersService.findCustomerDomainById(id);
 
         if (customerDomainOptional.isPresent()) {
             CustomerDomain customerDomain = customerDomainOptional.get();
