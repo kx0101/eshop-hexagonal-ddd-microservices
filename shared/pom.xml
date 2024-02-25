@@ -9,19 +9,16 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.elijahkx.customers</groupId>
-    <artifactId>customers</artifactId>
+    <groupId>com.elijahkx.shared</groupId>
+    <artifactId>shared</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
-    <description>customers service</description>
+    <description>shared</description>
 
     <modules>
-        <module>customers-app</module>
-        <module>customers-api</module>
-        <module>customers-adapter</module>
-        <module>customers-core</module>
+        <module>exceptions</module>
+        <module>utils</module>
     </modules>
-
 </project>

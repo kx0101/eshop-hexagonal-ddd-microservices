@@ -1,4 +1,4 @@
-package com.elijahkx.customers.adapters.validations;
+package com.elijahkx.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.elijahkx.customers.exceptions.EmailAlreadyExistsException;
+import com.elijahkx.utils.ElijahErrorResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;

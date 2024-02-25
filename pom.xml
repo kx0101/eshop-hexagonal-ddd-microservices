@@ -16,6 +16,7 @@
     </parent>
 
     <modules>
+        <module>shared</module>
         <module>customers</module>
     </modules>
 
@@ -39,6 +40,13 @@
                             <arg>-Amapstruct.defaultComponentModel=spring</arg>
                             <arg>-parameters</arg>
                         </compilerArgs>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <classifier>executable</classifier>
                     </configuration>
                 </plugin>
             </plugins>

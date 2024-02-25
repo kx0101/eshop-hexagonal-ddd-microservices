@@ -1,4 +1,4 @@
-package com.elijahkx.customers.adapters.validations;
+package com.elijahkx.utils;
 
 import org.springframework.http.HttpStatus;
 

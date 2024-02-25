@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elijahkx.customers.adapters.mappers.customers.CustomersMapper;
-import com.elijahkx.customers.adapters.validations.ElijahErrorResponse;
 import com.elijahkx.customers.domain.customers.CustomerDomain;
+
+import com.elijahkx.utils.ElijahErrorResponse;
+import com.elijahkx.exceptions.EmailAlreadyExistsException;
+
 import com.elijahkx.customers.rest.api.CustomersApi;
 import com.elijahkx.customers.rest.dto.Customer;
 import com.elijahkx.customers.service.customers.CustomersService;
@@ -39,6 +42,8 @@ public class CustomersController implements CustomersApi {
 
     @Override
     public ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer) {
+        emailExists(customer.getEmail());
+
         return ResponseEntity
                 .ok(customersMapper.domainToDto(customersService.addCustomer(customersMapper.dtoToDomain(customer))));
     }
@@ -82,6 +87,14 @@ public class CustomersController implements CustomersApi {
             ElijahErrorResponse errorResponse = new ElijahErrorResponse(HttpStatus.NOT_FOUND, "Customer not found");
 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+    }
+
+    private void emailExists(String email) {
+        Optional<CustomerDomain> customer = customersService.findCustomerDomainByEmail(email);
+
+        if (customer.isPresent()) {
+            throw new EmailAlreadyExistsException("Email already exists");
         }
     }
 }

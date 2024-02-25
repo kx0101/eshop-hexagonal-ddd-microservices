@@ -1,4 +1,4 @@
-package com.elijahkx.customers.exceptions;
+package com.elijahkx.exceptions;
 
 public class EmailAlreadyExistsException extends RuntimeException {
     public EmailAlreadyExistsException(String message) {
