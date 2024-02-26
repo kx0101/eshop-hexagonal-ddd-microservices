@@ -1,16 +1,16 @@
-package com.elijahkx.orders.inbound.rest;
+package com.elijahkx.orders.adapters.inbound.rest;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.elijahkx.orders.domain.orders.OrderDomain;
-import com.elijahkx.orders.mappers.orders.OrdersMapper;
+import com.elijahkx.orders.adapters.mappers.orders.OrdersMapper;
 import com.elijahkx.orders.rest.api.OrdersApi;
 import com.elijahkx.orders.rest.dto.Order;
 import com.elijahkx.orders.service.orders.OrdersService;
@@ -18,7 +18,7 @@ import com.elijahkx.utils.ElijahErrorResponse;
 
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
 @Validated
 public class OrdersController implements OrdersApi {
 
@@ -32,7 +32,7 @@ public class OrdersController implements OrdersApi {
     }
 
     @Override
-    public ResponseEntity<List<Order>> findByCriteria(@RequestParam Long id) {
+    public ResponseEntity<List<Order>> findByCriteria(Long id) {
         return ResponseEntity.ok(ordersMapper.domainToDto(ordersService.findByCriteria()));
     }
 

@@ -1,11 +1,11 @@
-package com.elijahkx.orders.mappers.orders;
+package com.elijahkx.orders.adapters.mappers.orders;
 
 import java.util.List;
 
 import org.mapstruct.Mapper;
 
 import com.elijahkx.orders.domain.orders.OrderDomain;
-import com.elijahkx.orders.outbound.persistence.entities.orders.OrderEntity;
+import com.elijahkx.orders.adapters.outbound.persistence.entities.orders.OrderEntity;
 import com.elijahkx.orders.rest.dto.Order;
 
 @Mapper

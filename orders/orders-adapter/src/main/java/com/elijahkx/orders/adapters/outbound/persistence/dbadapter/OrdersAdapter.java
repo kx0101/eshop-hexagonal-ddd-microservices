@@ -1,4 +1,4 @@
-package com.elijahkx.orders.outbound.persistence.dbadapter;
+package com.elijahkx.orders.adapters.outbound.persistence.dbadapter;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.elijahkx.orders.domain.orders.OrderDomain;
-import com.elijahkx.orders.mappers.orders.OrdersMapper;
+import com.elijahkx.orders.adapters.mappers.orders.OrdersMapper;
 import com.elijahkx.orders.outbound.persistence.OrdersPort;
-import com.elijahkx.orders.outbound.persistence.repositories.OrdersRepository;
+import com.elijahkx.orders.adapters.outbound.persistence.repositories.OrdersRepository;
 
 @Component
 public class OrdersAdapter implements OrdersPort {

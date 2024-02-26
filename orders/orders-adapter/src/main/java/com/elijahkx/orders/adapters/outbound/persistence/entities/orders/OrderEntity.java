@@ -1,4 +1,4 @@
-package com.elijahkx.orders.outbound.persistence.entities.orders;
+package com.elijahkx.orders.adapters.outbound.persistence.entities.orders;
 
 import java.time.LocalDate;
 
