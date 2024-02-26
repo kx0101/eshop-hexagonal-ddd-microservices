@@ -18,7 +18,7 @@ public class OrderEntity {
     private Long id;
 
     @Column(name = "time_created")
-    private LocalDate date;
+    private LocalDate createdDate;
 
     @Column(name = "customer_id")
     private Long customerId;

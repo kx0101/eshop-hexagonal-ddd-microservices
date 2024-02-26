@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elijahkx.orders.domain.orders.OrderDomain;
@@ -46,18 +48,20 @@ public class OrdersController implements OrdersApi {
     }
 
     @Override
-    public ResponseEntity<Order> addOrder(@Valid Order order) {
+    public ResponseEntity<Order> addOrder(@RequestBody @Valid Order order) {
         return ResponseEntity.ok(ordersMapper.domainToDto(ordersService.addOrder(ordersMapper.dtoToDomain(order))));
     }
 
     @Override
-    public ResponseEntity<Object> updateOrder(@Valid Order order, Long id) {
+    public ResponseEntity<Object> updateOrder(@RequestBody @Valid Order order, @PathVariable Long id) {
         Optional<OrderDomain> optionalOrderDomain = ordersService.findById(id);
 
         if (optionalOrderDomain.isPresent()) {
             OrderDomain orderDomain = optionalOrderDomain.get();
 
-            return ResponseEntity.noContent().build();
+            orderDomain.setCustomerId(order.getCustomerId());
+
+            return ResponseEntity.ok(ordersMapper.domainToDto(orderDomain));
 
         } else {
             ElijahErrorResponse errorResponse = new ElijahErrorResponse(HttpStatus.NOT_FOUND, "Order not found");

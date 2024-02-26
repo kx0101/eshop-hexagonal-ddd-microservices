@@ -33,6 +33,13 @@ public interface CustomersApi {
             @RequestParam(required = false) String email
     );
 
+    @Operation(summary = "Get a customer by id")
+    @GetMapping(BASE_URL + "/{id}")
+    ResponseEntity<Customer> findById(
+            @Parameter(description = "The id of the customer") 
+            @PathVariable(required = true) Long id
+    );
+
     @Operation(summary = "Create a new customer")
     @PostMapping(BASE_URL)
     ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer);
@@ -41,13 +48,6 @@ public interface CustomersApi {
     @PutMapping(BASE_URL + "/{id}")
     ResponseEntity<Object> updateCustomer(
             @RequestBody @Valid Customer customer,
-            @PathVariable(required = true) Long id
-    );
-
-    @Operation(summary = "Get a customer by id")
-    @GetMapping(BASE_URL + "/{id}")
-    ResponseEntity<Customer> findById(
-            @Parameter(description = "The id of the customer") 
             @PathVariable(required = true) Long id
     );
 

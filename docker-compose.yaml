@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  eshop:
+  postgres:
     image: postgres:latest
     environment:
       POSTGRES_DB: eshop
@@ -9,3 +9,21 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
+
+  # customers-service:
+  #   build:
+  #     context: ./customers
+  #     dockerfile: ./customers-app/Dockerfile
+  #   ports:
+  #     - "8081:8081"
+  #   depends_on:
+  #     - postgres
+  #
+  # orders-service:
+  #   build:
+  #     context: ./orders
+  #     dockerfile: ./orders-app/Dockerfile
+  #   ports:
+  #     - "8082:8082"
+  #   depends_on:
+  #     - postgres

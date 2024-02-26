@@ -3,6 +3,8 @@ package com.elijahkx.orders.adapters.outbound.persistence.dbadapter;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import com.elijahkx.orders.domain.orders.OrderDomain;
@@ -13,14 +15,11 @@ import com.elijahkx.orders.adapters.outbound.persistence.repositories.OrdersRepo
 @Component
 public class OrdersAdapter implements OrdersPort {
 
-    private final OrdersMapper ordersMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
 
-    private final OrdersRepository ordersRepository;
-
-    public OrdersAdapter(OrdersMapper ordersMapper, OrdersRepository ordersRepository) {
-        this.ordersMapper = ordersMapper;
-        this.ordersRepository = ordersRepository;
-    }
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     @Override
     public List<OrderDomain> findByCriteria() {
@@ -34,7 +33,11 @@ public class OrdersAdapter implements OrdersPort {
 
     @Override
     public OrderDomain addOrder(OrderDomain order) {
-        return ordersMapper.entityToDomain(ordersRepository.save(ordersMapper.domainToEntity(order)));
+        try {
+            return ordersMapper.entityToDomain(ordersRepository.save(ordersMapper.domainToEntity(order)));
+        } catch (DataIntegrityViolationException e) {
+            throw new RuntimeException("Customer with id " + order.getCustomerId() + " not found.");
+        }
     }
 
     @Override

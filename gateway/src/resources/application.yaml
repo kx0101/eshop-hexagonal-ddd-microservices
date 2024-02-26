@@ -1,9 +1,0 @@
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-components: always
-      show-details: always

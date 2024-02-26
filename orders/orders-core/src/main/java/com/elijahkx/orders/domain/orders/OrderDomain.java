@@ -2,8 +2,6 @@ package com.elijahkx.orders.domain.orders;
 
 import java.time.LocalDate;
 
-import com.elijahkx.customers.rest.dto.Customer;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -20,5 +18,5 @@ public class OrderDomain {
 
     private LocalDate createdDate;
 
-    private Customer customer;
+    private Long customerId;
 }
