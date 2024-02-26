@@ -18,6 +18,7 @@
     <modules>
         <module>shared</module>
         <module>customers</module>
+        <module>orders</module>
         <module>gateway</module>
     </modules>
 

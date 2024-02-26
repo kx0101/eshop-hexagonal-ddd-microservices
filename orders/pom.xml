@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.elijahkx</groupId>
+        <artifactId>eshop</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.elijahkx.orders</groupId>
+    <artifactId>orders</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <description>orders service</description>
+
+    <modules>
+        <module>orders-app</module>
+        <module>orders-api</module>
+        <module>orders-adapter</module>
+        <module>orders-core</module>
+    </modules>
+
+</project>
