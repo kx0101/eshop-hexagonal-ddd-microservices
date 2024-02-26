@@ -1,10 +1,7 @@
-FROM postgres:14
+FROM openjdk:21
 
-ENV POSTGRES_DB=eshop
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=postgres
+WORKDIR /app
 
-# Copy SQL scripts (optional)
-# COPY ./sql-scripts/ /docker-entrypoint-initdb.d/
+COPY ./customers-app/target/customers-app-0.0.1-SNAPSHOT-jar-with-dependencies.jar /app/customers-app.jar
 
-EXPOSE 5432
+ENTRYPOINT ["java", "-jar", "customers-app.jar"]
