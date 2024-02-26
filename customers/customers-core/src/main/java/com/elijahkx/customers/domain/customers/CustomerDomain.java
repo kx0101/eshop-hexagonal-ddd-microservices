@@ -9,8 +9,6 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class CustomerDomain {
     private Long id;
 
