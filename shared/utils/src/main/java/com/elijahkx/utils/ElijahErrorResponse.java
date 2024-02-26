@@ -19,4 +19,18 @@ public class ElijahErrorResponse {
     private String error;
 
     private List<String> messages;
+
+    public ElijahErrorResponse(HttpStatus status, List<String> messages) {
+        this.timestamp = LocalDateTime.now();
+        this.status = status.value();
+        this.error = status.getReasonPhrase();
+        this.messages = messages;
+    }
+
+    public ElijahErrorResponse(HttpStatus status, String message) {
+        this.timestamp = LocalDateTime.now();
+        this.status = status.value();
+        this.error = status.getReasonPhrase();
+        this.messages = Collections.singletonList(message);
+    }
 }
