@@ -5,15 +5,21 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.elijahkx.customers.adapters.outbound.rest.CustomersClient;
+import com.elijahkx.customers.rest.dto.Customer;
 import com.elijahkx.orders.domain.orders.OrderDomain;
 import com.elijahkx.orders.outbound.persistence.OrdersPort;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
+
     private final OrdersPort ordersPort;
 
-    public OrdersServiceImpl(OrdersPort ordersPort) {
+    private final CustomersClient customersClient;
+
+    public OrdersServiceImpl(OrdersPort ordersPort, CustomersClient customersClient) {
         this.ordersPort = ordersPort;
+        this.customersClient = customersClient;
     }
 
     @Override
@@ -28,6 +34,8 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public OrderDomain addOrder(OrderDomain order) {
+        customersClient.findById(order.getCustomerId()).getBody();
+
         return ordersPort.addOrder(order);
     }
 
