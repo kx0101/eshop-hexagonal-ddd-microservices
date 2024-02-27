@@ -20,5 +20,6 @@
     <modules>
         <module>exceptions</module>
         <module>utils</module>
+        <module>kafka</module>
     </modules>
 </project>
