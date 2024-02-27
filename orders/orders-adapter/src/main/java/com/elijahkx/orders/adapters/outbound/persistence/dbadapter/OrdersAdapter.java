@@ -12,6 +12,7 @@ import com.elijahkx.customers.adapters.outbound.rest.CustomersClient;
 import com.elijahkx.orders.adapters.mappers.orders.OrdersMapper;
 import com.elijahkx.orders.outbound.kafka.OrderEventPort;
 import com.elijahkx.orders.outbound.persistence.OrdersPort;
+import com.elijahkx.orders.adapters.outbound.persistence.entities.orders.OrderEntity;
 import com.elijahkx.orders.adapters.outbound.persistence.repositories.OrdersRepository;
 
 @Component
@@ -44,12 +45,14 @@ public class OrdersAdapter implements OrdersPort {
 
     @Override
     public OrderDomain addOrder(OrderDomain order) {
-        customersClient.findById(order.getCustomerId()).getBody();
-
-        orderEventPort.produce(order);
-
         try {
-            return ordersMapper.entityToDomain(ordersRepository.save(ordersMapper.domainToEntity(order)));
+            customersClient.findById(order.getCustomerId()).getBody();
+
+            OrderEntity savedOrderEntity = ordersRepository.save(ordersMapper.domainToEntity(order));
+
+            orderEventPort.produce(order);
+
+            return ordersMapper.entityToDomain(savedOrderEntity);
         } catch (DataIntegrityViolationException e) {
             throw new RuntimeException("Customer with id " + order.getCustomerId() + " not found.");
         }
