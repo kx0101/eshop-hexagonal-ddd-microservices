@@ -44,17 +44,17 @@ public class OrdersAdapter implements OrdersPort {
     }
 
     @Override
-    public OrderDomain addOrder(OrderDomain order) {
+    public OrderDomain addOrder(OrderDomain orderDomain) {
         try {
-            customersClient.findById(order.getCustomerId()).getBody();
+            customersClient.findById(orderDomain.getCustomerId()).getBody();
 
-            OrderEntity savedOrderEntity = ordersRepository.save(ordersMapper.domainToEntity(order));
+            OrderEntity savedOrderEntity = ordersRepository.save(ordersMapper.domainToEntity(orderDomain));
 
-            orderEventPort.produce(order);
+            orderEventPort.produce(orderDomain);
 
             return ordersMapper.entityToDomain(savedOrderEntity);
         } catch (DataIntegrityViolationException e) {
-            throw new RuntimeException("Customer with id " + order.getCustomerId() + " not found.");
+            throw new RuntimeException("Customer with id " + orderDomain.getCustomerId() + " not found.");
         }
     }
 
