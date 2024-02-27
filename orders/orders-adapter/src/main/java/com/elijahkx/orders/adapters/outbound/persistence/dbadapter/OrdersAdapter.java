@@ -8,7 +8,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import com.elijahkx.orders.domain.orders.OrderDomain;
+import com.elijahkx.customers.adapters.outbound.rest.CustomersClient;
 import com.elijahkx.orders.adapters.mappers.orders.OrdersMapper;
+import com.elijahkx.orders.outbound.kafka.OrderEventPort;
 import com.elijahkx.orders.outbound.persistence.OrdersPort;
 import com.elijahkx.orders.adapters.outbound.persistence.repositories.OrdersRepository;
 
@@ -20,6 +22,15 @@ public class OrdersAdapter implements OrdersPort {
 
     @Autowired
     private OrdersRepository ordersRepository;
+
+    private final CustomersClient customersClient;
+
+    private final OrderEventPort orderEventPort;
+
+    public OrdersAdapter(CustomersClient customersClient, OrderEventPort orderEventPort) {
+        this.customersClient = customersClient;
+        this.orderEventPort = orderEventPort;
+    }
 
     @Override
     public List<OrderDomain> findByCriteria() {
@@ -33,6 +44,10 @@ public class OrdersAdapter implements OrdersPort {
 
     @Override
     public OrderDomain addOrder(OrderDomain order) {
+        customersClient.findById(order.getCustomerId()).getBody();
+
+        orderEventPort.produce(order);
+
         try {
             return ordersMapper.entityToDomain(ordersRepository.save(ordersMapper.domainToEntity(order)));
         } catch (DataIntegrityViolationException e) {
