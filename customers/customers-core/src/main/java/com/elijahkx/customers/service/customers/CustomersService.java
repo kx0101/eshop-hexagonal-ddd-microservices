@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.elijahkx.customers.domain.customers.CustomerDomain;
 
 public interface CustomersService {
-    List<CustomerDomain> findByCriteria();
+    List<CustomerDomain> findByCriteria(String name, String email, int page, int size);
 
     CustomerDomain addCustomer(CustomerDomain customer);
 

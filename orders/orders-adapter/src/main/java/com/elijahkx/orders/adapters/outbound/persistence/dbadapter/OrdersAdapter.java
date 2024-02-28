@@ -3,8 +3,10 @@ package com.elijahkx.orders.adapters.outbound.persistence.dbadapter;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.elijahkx.orders.domain.orders.OrderDomain;
@@ -18,24 +20,32 @@ import com.elijahkx.orders.adapters.outbound.persistence.repositories.OrdersRepo
 @Component
 public class OrdersAdapter implements OrdersPort {
 
-    @Autowired
     private OrdersMapper ordersMapper;
 
-    @Autowired
     private OrdersRepository ordersRepository;
 
     private final CustomersClient customersClient;
 
     private final OrderEventPort orderEventPort;
 
-    public OrdersAdapter(CustomersClient customersClient, OrderEventPort orderEventPort) {
+    public OrdersAdapter(
+            OrdersMapper ordersMapper,
+            OrdersRepository ordersRepository,
+            CustomersClient customersClient,
+            OrderEventPort orderEventPort) {
+
+        this.ordersMapper = ordersMapper;
+        this.ordersRepository = ordersRepository;
         this.customersClient = customersClient;
         this.orderEventPort = orderEventPort;
     }
 
     @Override
-    public List<OrderDomain> findByCriteria() {
-        return ordersMapper.entityToDomain(ordersRepository.findAll());
+    public List<OrderDomain> findByCriteria(Long customerId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<OrderEntity> ordersPage = ordersRepository.findByCriteria(customerId, pageable);
+
+        return ordersMapper.entityToDomain(ordersPage.getContent());
     }
 
     @Override

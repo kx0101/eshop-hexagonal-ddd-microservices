@@ -18,8 +18,8 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<OrderDomain> findByCriteria() {
-        return ordersPort.findByCriteria();
+    public List<OrderDomain> findByCriteria(Long customerId, int page, int size) {
+        return ordersPort.findByCriteria(customerId, page, size);
     }
 
     @Override

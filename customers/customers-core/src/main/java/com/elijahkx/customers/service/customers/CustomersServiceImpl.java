@@ -19,8 +19,8 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     @Override
-    public List<CustomerDomain> findByCriteria() {
-        return customersPort.findByCriteria();
+    public List<CustomerDomain> findByCriteria(String name, String email, int page, int size) {
+        return customersPort.findByCriteria(name, email, page, size);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.elijahkx.orders.domain.orders.OrderDomain;
 
 public interface OrdersPort {
-    List<OrderDomain> findByCriteria();
+    List<OrderDomain> findByCriteria(Long customerId, int page, int size);
 
     Optional<OrderDomain> findById(Long id);
 

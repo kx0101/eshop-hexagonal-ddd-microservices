@@ -18,6 +18,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Tag(name = "orders", description = "the orders API")
 public interface OrdersApi {
@@ -27,14 +29,20 @@ public interface OrdersApi {
     @GetMapping(BASE_URL)
     ResponseEntity<List<Order>> findByCriteria(
             @Parameter(in = ParameterIn.QUERY, description = "The id of the customer") 
-            @RequestParam(required = false) Long id
+            @RequestParam(required = false) Long customerId,
+
+            @Parameter(in = ParameterIn.QUERY, description = "Page") 
+            @RequestParam(defaultValue = "0", required = false) @Min(0) int page,
+
+            @Parameter(in = ParameterIn.QUERY, description = "Size of each page") 
+            @RequestParam(defaultValue = "10", required = false) @Min(1) @Max(10) int size
     );
 
     @Operation(summary = "Get all orders")
     @GetMapping(BASE_URL + "/{id}")
     ResponseEntity<Order> findByid(
             @Parameter(description = "The id of the customer") 
-            @PathVariable(required = false) Long id
+            @PathVariable(required = true) Long id
     );
 
     @Operation(summary = "Create a new order")

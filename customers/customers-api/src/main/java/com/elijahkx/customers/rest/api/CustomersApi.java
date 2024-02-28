@@ -18,6 +18,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Tag(name = "customers", description = "the customers API")
 public interface CustomersApi {
@@ -30,7 +32,13 @@ public interface CustomersApi {
             @RequestParam(required = false) String name,
 
             @Parameter(in = ParameterIn.QUERY, description = "The email of the customer")
-            @RequestParam(required = false) String email
+            @RequestParam(required = false) String email,
+
+            @Parameter(in = ParameterIn.QUERY, description = "Page") 
+            @RequestParam(defaultValue = "0", required = false) @Min(0) int page,
+
+            @Parameter(in = ParameterIn.QUERY, description = "Size of each page") 
+            @RequestParam(defaultValue = "10", required = false) @Min(1) @Max(10) int size
     );
 
     @Operation(summary = "Get a customer by id")

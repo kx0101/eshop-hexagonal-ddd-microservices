@@ -1,5 +1,6 @@
 package com.elijahkx.customers.adapters.outbound.persistence.dbadapter;
 
+import com.elijahkx.customers.adapters.outbound.persistence.entities.customer.CustomerEntity;
 import com.elijahkx.customers.adapters.outbound.persistence.repositories.CustomersRepository;
 import com.elijahkx.customers.domain.customers.CustomerDomain;
 import com.elijahkx.customers.outbound.persistence.CustomersPort;
@@ -8,6 +9,9 @@ import com.elijahkx.exceptions.EmailAlreadyExistsException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.elijahkx.customers.adapters.mappers.customers.CustomersMapper;
@@ -25,8 +29,11 @@ public class CustomersDBAdapter implements CustomersPort {
     }
 
     @Override
-    public List<CustomerDomain> findByCriteria() {
-        return customersMapper.entityToDomain(customersRepository.findAll());
+    public List<CustomerDomain> findByCriteria(String name, String email, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CustomerEntity> customersPage = customersRepository.findByCriteria(name, email, pageable);
+
+        return customersMapper.entityToDomain(customersPage.getContent());
     }
 
     @Override

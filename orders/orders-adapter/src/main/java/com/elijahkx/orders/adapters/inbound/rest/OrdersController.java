@@ -33,8 +33,8 @@ public class OrdersController implements OrdersApi {
     }
 
     @Override
-    public ResponseEntity<List<Order>> findByCriteria(Long id) {
-        return ResponseEntity.ok(ordersMapper.domainToDto(ordersService.findByCriteria()));
+    public ResponseEntity<List<Order>> findByCriteria(Long customerId, int page, int size) {
+        return ResponseEntity.ok(ordersMapper.domainToDto(ordersService.findByCriteria(customerId, page, size)));
     }
 
     @Override
