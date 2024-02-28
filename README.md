@@ -1,3 +1,3 @@
 # (current) Goal:
 
-![design](design.png)
+![system](system.png)
