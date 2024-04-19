@@ -45,7 +45,6 @@ public class OrderCreatedProducer implements OrderEventPort {
     @Override
     public void produce(OrderDomain orderDomain) {
         KafkaTemplate<String, OrderDomain> kafkaTemplate = kafkaTemplate(producerFactory());
-
         kafkaTemplate.send("orderCreated", orderDomain);
     }
 }
